@@ -22,13 +22,13 @@ export class BottomNavComponent extends Component {
         key: 2,
         icon: 'ios-key',
         title: 'Chords',
-        screen: 'Chords'
+        screen: 'PageChords'
       },
       {
         key: 3,
         icon: 'ios-contact',
         title: 'Artist',
-        screen: 'Artist'
+        screen: 'PageArtist'
       },
       {
         key: 4,
