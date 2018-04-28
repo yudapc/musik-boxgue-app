@@ -1,5 +1,10 @@
 {
   "expo": {
-    "sdkVersion": "26.0.0"
+    "name": "Chords Boxgue",
+    "description": "Chords Boxgue Apps",
+    "slug": "chords",
+    "sdkVersion": "26.0.0",
+    "version": "1.0.0",
+    "privacy": "unlisted"
   }
 }

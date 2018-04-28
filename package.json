@@ -21,6 +21,19 @@
   "dependencies": {
     "expo": "^26.0.0",
     "react": "16.3.0",
-    "react-native": "~0.54.1"
+    "react-native": "~0.54.1",
+    "react-navigation": "^1.5.11",
+    "react-redux": "^5.0.7"
+  },
+  "prettier": {
+    "printWidth": 100,
+    "indent_size": 2,
+    "indent_char": " ",
+    "singleQuote": true,
+    "trallingComma": {
+      "array": true,
+      "object": true,
+      "function": false
+    }
   }
 }

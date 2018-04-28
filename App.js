@@ -1,15 +1,23 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { Provider } from 'react-redux';
+import { StackNavigator, SwitchNavigator } from 'react-navigation';
 import { StyleSheet, Text, View } from 'react-native';
+import { PageLanding } from './app/components/page-landing';
+import { PageHome } from './app/components/page-home';
 
-export default class App extends React.Component {
+const RootNavigator = StackNavigator(
+  {
+    PageLanding: { screen: PageLanding },
+    Home: { screen: PageHome }
+  },
+  {
+    initialRouteName: 'PageLanding'
+  }
+);
+
+export default class App extends Component {
   render() {
-    return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-      </View>
-    );
+    return <RootNavigator />;
   }
 }
 
@@ -18,6 +26,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
-  },
+    justifyContent: 'center'
+  }
 });
