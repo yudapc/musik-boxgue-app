@@ -14,7 +14,7 @@ export class PageLandingComponent extends Component {
   goToHomePage = () => {
     const { navigation } = this.props;
     passProps = { navigation };
-    navigation.navigate('PageHome', passProps);
+    navigation.navigate('PageNavigation', passProps);
   };
   render() {
     return (

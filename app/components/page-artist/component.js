@@ -1,16 +1,21 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
-import { BottomNav } from '../bottom-nav';
+import { styles } from './styles';
 
 export class PageArtistComponent extends Component {
   constructor(props) {
     super(props);
   }
+  static navigationOptions = () => {
+    return {
+      title: 'Artist',
+      headerLeft: null
+    };
+  };
   render() {
     return (
-      <View style={{ flex: 1 }}>
-        <Text>Page Artist</Text>
-        <BottomNav navigation={this.props.navigation} />
+      <View style={styles.container}>
+        <Text style={styles.textWelcome}>Page Artist</Text>
       </View>
     );
   }

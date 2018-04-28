@@ -1,16 +1,21 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
-import { BottomNav } from '../bottom-nav';
+import { styles } from './styles';
 
 export class PageHelpComponent extends Component {
   constructor(props) {
     super(props);
   }
+  static navigationOptions = () => {
+    return {
+      title: 'Help',
+      headerLeft: null
+    };
+  };
   render() {
     return (
-      <View style={{ flex: 1 }}>
-        <Text>Page Help</Text>
-        <BottomNav navigation={this.props.navigation} />
+      <View style={styles.container}>
+        <Text style={styles.textWelcome}>Page Help</Text>
       </View>
     );
   }
