@@ -6,7 +6,9 @@ export const config = {
       text: '#000',
       button: 'rgb(47, 120, 207)',
       border: 'rgb(193, 195, 201)',
-      gray: 'gray'
+      gray: 'gray',
+      tomato: 'tomato',
+      light: 'rgb(255, 202, 4)'
     }
   }
 };

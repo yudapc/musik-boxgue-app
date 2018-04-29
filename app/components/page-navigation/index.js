@@ -40,8 +40,11 @@ export const PageNavigation = TabNavigator(
     tabBarComponent: TabBarBottom,
     tabBarPosition: 'bottom',
     tabBarOptions: {
-      activeTintColor: config.default.color.button,
-      inactiveTintColor: config.default.color.gray
+      activeTintColor: config.default.color.light,
+      inactiveTintColor: config.default.color.background,
+      style: {
+        backgroundColor: config.default.color.primary
+      }
     },
     animationEnabled: true,
     swipeEnabled: false
