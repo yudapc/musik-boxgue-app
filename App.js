@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import { StackNavigator } from 'react-navigation';
 import store from './app/store/store';
+import config from './app/config';
 import { registerConnectionChange } from './app/helpers/check-connection';
 import { PageLanding } from './app/components/page-landing';
 import { PageNavigation } from './app/components/page-navigation';
@@ -24,7 +25,13 @@ const RootNavigator = StackNavigator(
     PageChordsDetail: { screen: PageChordsDetail }
   },
   {
-    initialRouteName: 'PageLanding'
+    initialRouteName: 'PageLanding',
+    navigationOptions: {
+      headerTintColor: config.default.color.background,
+      headerStyle: {
+        backgroundColor: config.default.color.primary
+      }
+    }
   }
 );
 

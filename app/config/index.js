@@ -1,7 +1,7 @@
 export const config = {
   default: {
     color: {
-      primary: '#3C1FE0',
+      primary: 'rgb(47, 120, 207)',
       background: '#fff',
       text: '#000',
       button: 'rgb(47, 120, 207)',
