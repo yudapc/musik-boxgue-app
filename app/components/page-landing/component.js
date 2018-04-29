@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { View, ActivityIndicator } from 'react-native';
 import { styles } from './styles';
 import config from '../../config';
@@ -36,5 +37,9 @@ export class PageLandingComponent extends Component {
     );
   }
 }
+
+PageLandingComponent.propTypes = {
+  navigation: PropTypes.object.isRequired
+};
 
 export default PageLandingComponent;

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { View, Text } from 'react-native';
 import { styles } from './styles';
 
@@ -24,4 +25,9 @@ export class PageChordsDetailComponent extends Component {
     );
   }
 }
+
+PageChordsDetailComponent.propTypes = {
+  navigation: PropTypes.object.isRequired
+};
+
 export default PageChordsDetailComponent;
