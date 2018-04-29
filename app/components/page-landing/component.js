@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, ActivityIndicator } from 'react-native';
 import { styles } from './styles';
 import config from '../../config';
+import { isOffline } from '../../helpers/check-connection';
 
 export class PageLandingComponent extends Component {
   static navigationOptions = {
@@ -10,6 +11,17 @@ export class PageLandingComponent extends Component {
   constructor(props) {
     super(props);
     this.goToHomePage();
+  }
+  componentWillMount() {
+    isOffline(this.props);
+  }
+  shouldComponentUpdate(nextProps) {
+    if (nextProps.isConnected !== this.props.isConnected) {
+      return true;
+    }
+  }
+  componentDidUpdate() {
+    isOffline(this.props);
   }
   goToHomePage = () => {
     const { navigation } = this.props;

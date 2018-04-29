@@ -1,1 +1,1 @@
-export { PageLandingComponent as PageLanding } from './component';
+export { PageLandingContainer as PageLanding } from './container';
