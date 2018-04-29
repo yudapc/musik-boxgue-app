@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { PageLandingComponent } from './component';
-const mapStateToProps = (state: any) => {
+const mapStateToProps = state => {
   return {
     isConnected: state.globalReducer.isConnected
   };

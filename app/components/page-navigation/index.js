@@ -5,6 +5,7 @@ import { PageHome } from '../page-home';
 import { PageChords } from '../page-chords';
 import { PageArtist } from '../page-artist';
 import { PageHelp } from '../page-help';
+import config from '../../config';
 
 export const PageNavigation = TabNavigator(
   {
@@ -39,8 +40,8 @@ export const PageNavigation = TabNavigator(
     tabBarComponent: TabBarBottom,
     tabBarPosition: 'bottom',
     tabBarOptions: {
-      activeTintColor: 'tomato',
-      inactiveTintColor: 'gray'
+      activeTintColor: config.default.color.button,
+      inactiveTintColor: config.default.color.gray
     },
     animationEnabled: true,
     swipeEnabled: false

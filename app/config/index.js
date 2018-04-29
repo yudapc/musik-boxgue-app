@@ -4,8 +4,9 @@ export const config = {
       primary: '#3C1FE0',
       background: '#fff',
       text: '#000',
-      button: '#E0AD1F',
-      border: 'rgb(193, 195, 201)'
+      button: 'rgb(47, 120, 207)',
+      border: 'rgb(193, 195, 201)',
+      gray: 'gray'
     }
   }
 };

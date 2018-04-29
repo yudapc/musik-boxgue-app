@@ -9,7 +9,7 @@ export class PageChordsDetailComponent extends Component {
   static navigationOptions = ({ navigation }) => {
     const { params } = navigation.state;
     return {
-      title: params ? params.title : null
+      title: null //params ? params.title : null
     };
   };
   render() {

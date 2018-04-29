@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import config from '../../config';
 
 const styles = StyleSheet.create({
   container: {
@@ -27,7 +28,7 @@ const styles = StyleSheet.create({
     width: 128,
     height: 40,
     borderRadius: 5,
-    backgroundColor: 'rgb(47, 120, 207)'
+    backgroundColor: config.default.color.button
   },
   buttonText: {
     fontSize: 16,

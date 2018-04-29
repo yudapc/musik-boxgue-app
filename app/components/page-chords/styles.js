@@ -13,9 +13,13 @@ export const styles = StyleSheet.create({
   },
   item: {
     padding: 10,
-    height: 44,
+    height: 70,
     borderBottomWidth: 1,
-    borderColor: config.default.color.border
+    borderColor: config.default.color.border,
+    justifyContent: 'center'
+  },
+  itemText: {
+    fontSize: 16
   }
 });
 

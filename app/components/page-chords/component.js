@@ -48,7 +48,9 @@ export class PageChordsComponent extends Component {
         }
       >
         <View style={styles.item}>
-          <Text numberOfLines={1}>{chord.title}</Text>
+          <Text numberOfLines={2} style={styles.itemText}>
+            {chord.title}
+          </Text>
         </View>
       </TouchableWithoutFeedback>
     );
