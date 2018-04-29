@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center'
   },
   item: {
-    padding: 10,
+    paddingVertical: 10,
     height: 70,
     borderBottomWidth: 0.5,
     borderColor: config.default.color.border,
