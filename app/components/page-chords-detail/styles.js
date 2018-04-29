@@ -5,11 +5,18 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: config.default.color.background,
-    justifyContent: 'center',
-    alignItems: 'center'
+    padding: 16
   },
-  textWelcome: {
+  textTitle: {
     fontSize: 22,
+    color: config.default.color.text,
+    fontWeight: 'bold'
+  },
+  bodyContainer: {
+    paddingVertical: 16
+  },
+  textBody: {
+    fontSize: 16,
     color: config.default.color.text
   }
 });

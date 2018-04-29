@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { ScrollView, View, Text, TouchableWithoutFeedback } from 'react-native';
+import { ScrollView, View, Text, TouchableWithoutFeedback, ActivityIndicator } from 'react-native';
 import { styles } from './styles';
+import apisauce from 'apisauce';
+import config from '../../config';
 
 const chordsData = [
   {
@@ -20,7 +22,14 @@ const chordsData = [
 export class PageChordsComponent extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      loading: true,
+      chords: []
+    };
   }
+  componentDidMount = () => {
+    const chords = this.fetchChords();
+  };
   static navigationOptions = () => {
     return {
       title: 'Chords',
@@ -33,21 +42,43 @@ export class PageChordsComponent extends Component {
         key={chord.id}
         onPress={() =>
           this.props.navigation.navigate('PageChordsDetail', {
-            title: chord.title
+            title: chord.title,
+            body: chord.body
           })
         }
       >
         <View style={styles.item}>
-          <Text>{chord.title}</Text>
+          <Text numberOfLines={1}>{chord.title}</Text>
         </View>
       </TouchableWithoutFeedback>
     );
   };
+  fetchChords = async () => {
+    const baseURL = 'https://jsonplaceholder.typicode.com';
+    const path = '/posts';
+    const api = apisauce.create({
+      baseURL,
+      timeout: 30000
+    });
+    const response = await api.get(path);
+    console.log('response: ', response.data[0].title);
+    if (response.ok) {
+      this.setState({ chords: response.data, loading: false });
+    }
+  };
   render() {
+    if (this.state.loading) {
+      return (
+        <View style={[styles.container, styles.loadingContainer]}>
+          <ActivityIndicator size="small" color={config.default.color.primary} />
+        </View>
+      );
+    }
+    const chords = this.state.chords;
     return (
       <ScrollView>
         <View style={styles.container}>
-          {chordsData.length > 0 && chordsData.map(chord => this.renderItem(chord))}
+          {chords.length > 0 && chords.map(chord => this.renderItem(chord))}
         </View>
       </ScrollView>
     );

@@ -13,9 +13,15 @@ export class PageChordsDetailComponent extends Component {
     };
   };
   render() {
+    const { params } = this.props.navigation.state;
     return (
       <View style={styles.container}>
-        <Text style={styles.textWelcome}>Page Chords Detail</Text>
+        <Text style={styles.textTitle} numberOfLines={2}>
+          {params.title}
+        </Text>
+        <View style={styles.bodyContainer}>
+          <Text style={styles.textBody}>{params.body}</Text>
+        </View>
       </View>
     );
   }
