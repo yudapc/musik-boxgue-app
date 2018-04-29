@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
   item: {
     padding: 10,
     height: 70,
-    borderBottomWidth: 1,
+    borderBottomWidth: 0.5,
     borderColor: config.default.color.border,
     justifyContent: 'center'
   },
