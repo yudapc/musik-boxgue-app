@@ -1,4 +1,5 @@
 export const config = {
+  isLocal: false,
   default: {
     color: {
       primary: 'rgb(47, 120, 207)',

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { View, Text } from 'react-native';
+import { ScrollView, View, Text } from 'react-native';
 import { styles } from './styles';
+import HTMLView from 'react-native-htmlview';
 
 export class PageChordsDetailComponent extends Component {
   constructor(props) {
@@ -16,12 +17,12 @@ export class PageChordsDetailComponent extends Component {
   render() {
     const { params } = this.props.navigation.state;
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <Text style={styles.textTitle}>{params.title}</Text>
         <View style={styles.bodyContainer}>
-          <Text style={styles.textBody}>{params.body}</Text>
+          <HTMLView value={params.body} />
         </View>
-      </View>
+      </ScrollView>
     );
   }
 }

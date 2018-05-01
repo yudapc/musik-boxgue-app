@@ -13,7 +13,7 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold'
   },
   bodyContainer: {
-    paddingVertical: 16
+    paddingVertical: 50
   },
   textBody: {
     fontSize: 16,

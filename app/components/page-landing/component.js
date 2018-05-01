@@ -14,15 +14,15 @@ export class PageLandingComponent extends Component {
     this.goToHomePage();
   }
   componentWillMount() {
-    isOffline(this.props);
+    if (!config.isLocal) isOffline(this.props);
   }
   shouldComponentUpdate(nextProps) {
-    if (nextProps.isConnected !== this.props.isConnected) {
+    if (nextProps.isConnected !== this.props.isConnected && !config.isLocal) {
       return true;
     }
   }
   componentDidUpdate() {
-    isOffline(this.props);
+    if (!config.isLocal) isOffline(this.props);
   }
   goToHomePage = () => {
     const { navigation } = this.props;

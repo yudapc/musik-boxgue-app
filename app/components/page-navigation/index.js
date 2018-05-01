@@ -1,7 +1,6 @@
 import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { TabNavigator, TabBarBottom } from 'react-navigation';
-import { PageHome } from '../page-home';
 import { PageChords } from '../page-chords';
 import { PageArtist } from '../page-artist';
 import { PageHelp } from '../page-help';
@@ -9,7 +8,6 @@ import config from '../../config';
 
 export const PageNavigation = TabNavigator(
   {
-    TabHome: { screen: PageHome },
     TabChords: { screen: PageChords },
     TabArtist: { screen: PageArtist },
     TabHelp: { screen: PageHelp }
@@ -19,9 +17,6 @@ export const PageNavigation = TabNavigator(
       tabBarIcon: ({ focused, tintColor }) => {
         const { routeName } = navigation.state;
         let iconName;
-        if (routeName === 'TabHome') {
-          iconName = `md-home`;
-        }
         if (routeName === 'TabChords') {
           iconName = `ios-key${focused ? '' : '-outline'}`;
         }

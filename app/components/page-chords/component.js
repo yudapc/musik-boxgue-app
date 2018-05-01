@@ -1,23 +1,9 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { ScrollView, View, Text, TouchableWithoutFeedback, ActivityIndicator } from 'react-native';
 import { styles } from './styles';
 import apisauce from 'apisauce';
 import config from '../../config';
-
-const chordsData = [
-  {
-    id: 1,
-    title: 'Chord ke-1'
-  },
-  {
-    id: 2,
-    title: 'Chord ke-2'
-  },
-  {
-    id: 3,
-    title: 'Chord ke-3'
-  }
-];
 
 export class PageChordsComponent extends Component {
   constructor(props) {
@@ -28,7 +14,9 @@ export class PageChordsComponent extends Component {
     };
   }
   componentDidMount = () => {
-    const chords = this.fetchChords();
+    const { params } = this.props.navigation.state;
+    const keyword = params.keyword !== undefined ? params.keyword : '';
+    const chords = this.fetchChords(keyword);
   };
   static navigationOptions = () => {
     return {
@@ -55,15 +43,15 @@ export class PageChordsComponent extends Component {
       </TouchableWithoutFeedback>
     );
   };
-  fetchChords = async () => {
-    const baseURL = 'https://jsonplaceholder.typicode.com';
-    const path = '/posts';
+  fetchChords = async keyword => {
+    const baseURL = 'https://private-cf0fb-yudacogati.apiary-mock.com';
+    const querySearch = keyword !== '' || keyword !== undefined ? `?q=${keyword}` : '';
+    const path = `/chords${querySearch}`;
     const api = apisauce.create({
       baseURL,
       timeout: 30000
     });
     const response = await api.get(path);
-    console.log('response: ', response.data[0].title);
     if (response.ok) {
       this.setState({ chords: response.data, loading: false });
     }
@@ -86,5 +74,13 @@ export class PageChordsComponent extends Component {
     );
   }
 }
+
+PageChordsComponent.defaultProps = {
+  state: {}
+};
+
+PageChordsComponent.propTypes = {
+  state: PropTypes.object
+};
 
 export default PageChordsComponent;

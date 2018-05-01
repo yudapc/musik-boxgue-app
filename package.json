@@ -3,8 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
-    "react-native-scripts": "1.13.2",
     "jest-expo": "26.0.0",
+    "json-server": "^0.12.2",
+    "react-native-scripts": "1.13.2",
     "react-test-renderer": "16.3.0-alpha.1"
   },
   "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
@@ -24,6 +25,7 @@
     "prop-types": "^15.6.1",
     "react": "16.3.0",
     "react-native": "~0.54.1",
+    "react-native-htmlview": "^0.12.1",
     "react-navigation": "^1.5.11",
     "react-redux": "^5.0.7",
     "redux-thunk": "^2.2.0"
