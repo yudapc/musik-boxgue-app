@@ -10,7 +10,10 @@ export class PageChordsComponent extends Component {
     super(props);
     this.state = {
       loading: true,
-      chords: []
+      page: 0,
+      chords: [],
+      fetching: false,
+      keyword: ''
     };
   }
   componentDidMount = () => {
@@ -31,7 +34,7 @@ export class PageChordsComponent extends Component {
         onPress={() =>
           this.props.navigation.navigate('PageChordsDetail', {
             title: chord.title,
-            body: chord.body
+            body: chord.content_body
           })
         }
       >
@@ -43,19 +46,30 @@ export class PageChordsComponent extends Component {
       </TouchableWithoutFeedback>
     );
   };
-  fetchChords = async keyword => {
-    const baseURL = 'https://private-cf0fb-yudacogati.apiary-mock.com';
+  fetchChords = async () => {
+    const keyword = this.state.keyword;
+    const page = this.state.page + 1;
+    const baseURL = 'http://musik.boxgue.com/api/v1';
     const querySearch = keyword !== '' || keyword !== undefined ? `?q=${keyword}` : '';
-    const path = `/chords${querySearch}`;
+    const path = `/chords${querySearch}&page=${page}&access_token=perfectSecret@j@`;
     const api = apisauce.create({
       baseURL,
       timeout: 30000
     });
     const response = await api.get(path);
     if (response.ok) {
-      this.setState({ chords: response.data, loading: false });
+      this.setState({ chords: this.state.chords.concat(response.data), loading: false, page });
     }
   };
+  loadMore() {
+    this.setState({ fetching: true }, () => {
+      setTimeout(() => {
+        this.fetchChords();
+        this.setState({ fetching: false });
+      }, 500);
+    });
+  }
+
   render() {
     if (this.state.loading) {
       return (
@@ -66,7 +80,24 @@ export class PageChordsComponent extends Component {
     }
     const chords = this.state.chords;
     return (
-      <ScrollView>
+      <ScrollView
+        scrollEventThrottle={1000}
+        onScroll={event => {
+          if (this.state.loading) {
+            return;
+          }
+
+          const offset = event.nativeEvent.contentOffset.y;
+          const height =
+            event.nativeEvent.contentSize.height - event.nativeEvent.layoutMeasurement.height;
+
+          if (offset >= height) {
+            if (this.state.fetching === false) {
+              this.loadMore();
+            }
+          }
+        }}
+      >
         <View style={styles.container}>
           {chords.length > 0 && chords.map(chord => this.renderItem(chord))}
         </View>
