@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { ScrollView, View, Text, TouchableWithoutFeedback, ActivityIndicator } from 'react-native';
+import {
+  ScrollView,
+  View,
+  Text,
+  TouchableWithoutFeedback,
+  ActivityIndicator,
+  RefreshControl
+} from 'react-native';
 import { styles } from './styles';
 import apisauce from 'apisauce';
 import config from '../../config';
@@ -19,7 +26,7 @@ export class PageChordsComponent extends Component {
   componentDidMount = () => {
     const { params } = this.props.navigation.state;
     const keyword = params.keyword !== undefined ? params.keyword : '';
-    const chords = this.fetchChords(keyword);
+    const chords = this.fetchChords(keyword, 1);
   };
   static navigationOptions = () => {
     return {
@@ -46,9 +53,7 @@ export class PageChordsComponent extends Component {
       </TouchableWithoutFeedback>
     );
   };
-  fetchChords = async () => {
-    const keyword = this.state.keyword;
-    const page = this.state.page + 1;
+  fetchChords = async (keyword, page) => {
     const baseURL = 'http://musik.boxgue.com/api/v1';
     const querySearch = keyword !== '' || keyword !== undefined ? `?q=${keyword}` : '';
     const path = `/chords${querySearch}&page=${page}&access_token=perfectSecret@j@`;
@@ -64,7 +69,16 @@ export class PageChordsComponent extends Component {
   loadMore() {
     this.setState({ fetching: true }, () => {
       setTimeout(() => {
-        this.fetchChords();
+        this.fetchChords(this.state.keyword, this.state.page + 1);
+        this.setState({ fetching: false });
+      }, 500);
+    });
+  }
+
+  onRefresh() {
+    this.setState({ fetching: true, chords: [] }, () => {
+      setTimeout(() => {
+        this.fetchChords('', 1);
         this.setState({ fetching: false });
       }, 500);
     });
@@ -81,6 +95,13 @@ export class PageChordsComponent extends Component {
     const chords = this.state.chords;
     return (
       <ScrollView
+        refreshControl={
+          <RefreshControl
+            refreshing={this.state.loading}
+            onRefresh={() => this.onRefresh()}
+            colors={[config.default.color.primary]}
+          />
+        }
         scrollEventThrottle={1000}
         onScroll={event => {
           if (this.state.loading) {

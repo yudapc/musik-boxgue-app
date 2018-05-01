@@ -7,6 +7,7 @@ import { PageChords } from '../components/page-chords';
 import { PageArtist } from '../components/page-artist';
 import { PageHelp } from '../components/page-help';
 import { PageChordsDetail } from '../components/page-chords-detail';
+import { PageArtistDetail } from '../components/page-artist-detail';
 import { PageOffline } from '../components/page-offline';
 
 export const RootNavigator = StackNavigator(
@@ -18,7 +19,8 @@ export const RootNavigator = StackNavigator(
     PageChords: { screen: PageChords },
     PageArtist: { screen: PageArtist },
     PageHelp: { screen: PageHelp },
-    PageChordsDetail: { screen: PageChordsDetail }
+    PageChordsDetail: { screen: PageChordsDetail },
+    PageArtistDetail: { screen: PageArtistDetail }
   },
   {
     initialRouteName: 'PageLanding',

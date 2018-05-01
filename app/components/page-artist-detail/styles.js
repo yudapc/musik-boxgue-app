@@ -11,15 +11,17 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
-  item: {
-    paddingVertical: 10,
-    height: 70,
-    borderBottomWidth: 0.5,
-    borderColor: config.default.color.border,
-    justifyContent: 'center'
+  textTitle: {
+    fontSize: 22,
+    color: config.default.color.text,
+    fontWeight: 'bold'
   },
-  itemText: {
-    fontSize: 16
+  bodyContainer: {
+    paddingVertical: 50
+  },
+  textBody: {
+    fontSize: 16,
+    color: config.default.color.text
   }
 });
 
