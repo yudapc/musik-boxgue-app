@@ -22,6 +22,16 @@ export const styles = StyleSheet.create({
   textBody: {
     fontSize: 16,
     color: config.default.color.text
+  },
+  item: {
+    paddingVertical: 10,
+    height: 70,
+    borderBottomWidth: 0.5,
+    borderColor: config.default.color.border,
+    justifyContent: 'center'
+  },
+  itemText: {
+    fontSize: 16
   }
 });
 

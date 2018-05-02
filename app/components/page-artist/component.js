@@ -38,13 +38,13 @@ export class PageArtistComponent extends Component {
     return (
       <TouchableWithoutFeedback
         key={artist.id}
-        // onPress={() =>
-        //   this.props.navigation.navigate('PageArtistDetail', {
-        //     id: artist.id,
-        //     title: artist.name,
-        //     body: artist.content_body
-        //   })
-        // }
+        onPress={() =>
+          this.props.navigation.navigate('PageArtistDetail', {
+            id: artist.id,
+            title: artist.name,
+            body: artist.content_body
+          })
+        }
       >
         <View style={styles.item}>
           <Text numberOfLines={2} style={styles.itemText}>

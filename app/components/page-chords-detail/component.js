@@ -11,7 +11,7 @@ export class PageChordsDetailComponent extends Component {
   static navigationOptions = ({ navigation }) => {
     const { params } = navigation.state;
     return {
-      title: null //params ? params.title : null
+      title: 'Detail' //params ? params.title : null
     };
   };
   render() {
