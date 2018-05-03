@@ -1,1 +1,1 @@
-export { PageChordsComponent as PageChords } from './component';
+export { PageChordsContainer as PageChords } from './container';

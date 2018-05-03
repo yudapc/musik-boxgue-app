@@ -11,22 +11,17 @@ import {
 import { styles } from './styles';
 import apisauce from 'apisauce';
 import config from '../../config';
+import { union } from 'lodash';
+import generateUniqKey from '../../helpers/generate-uniq-key';
 
 export class PageChordsComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      loading: true,
-      page: 0,
-      chords: [],
-      fetching: false,
-      keyword: ''
-    };
+    this.state = {};
   }
   componentDidMount = () => {
-    const { params } = this.props.navigation.state;
-    const keyword = params.keyword !== undefined ? params.keyword : '';
-    const chords = this.fetchChords(keyword, 1);
+    const { keyword } = this.props;
+    this.props.getData(keyword, 1);
   };
   static navigationOptions = () => {
     return {
@@ -37,7 +32,7 @@ export class PageChordsComponent extends Component {
   renderItem = chord => {
     return (
       <TouchableWithoutFeedback
-        key={chord.id}
+        key={generateUniqKey(chord.id)}
         onPress={() =>
           this.props.navigation.navigate('PageChordsDetail', {
             title: chord.title,
@@ -53,67 +48,39 @@ export class PageChordsComponent extends Component {
       </TouchableWithoutFeedback>
     );
   };
-  fetchChords = async (keyword, page) => {
-    const baseURL = 'http://musik.boxgue.com/api/v1';
-    const querySearch = keyword !== '' || keyword !== undefined ? `?q=${keyword}` : '';
-    const path = `/chords${querySearch}&page=${page}&access_token=perfectSecret@j@`;
-    const api = apisauce.create({
-      baseURL,
-      timeout: 30000
-    });
-    const response = await api.get(path);
-    if (response.ok) {
-      this.setState({ chords: this.state.chords.concat(response.data), loading: false, page });
-    }
-  };
   loadMore() {
-    this.setState({ fetching: true }, () => {
-      setTimeout(() => {
-        this.fetchChords(this.state.keyword, this.state.page + 1);
-        this.setState({ fetching: false });
-      }, 500);
-    });
+    const { keyword, page } = this.props;
+    this.props.getData(keyword, page);
   }
-
   onRefresh() {
-    this.setState({ fetching: true, chords: [] }, () => {
-      setTimeout(() => {
-        this.fetchChords('', 1);
-        this.setState({ fetching: false });
-      }, 500);
-    });
+    const { keyword } = this.props;
+    this.props.refreshPage();
   }
-
   render() {
-    if (this.state.loading) {
+    const { isLoading, chords } = this.props;
+    if (isLoading) {
       return (
         <View style={[styles.container, styles.loadingContainer]}>
           <ActivityIndicator size="small" color={config.default.color.primary} />
         </View>
       );
     }
-    const chords = this.state.chords;
     return (
       <ScrollView
         refreshControl={
           <RefreshControl
-            refreshing={this.state.loading}
+            refreshing={isLoading}
             onRefresh={() => this.onRefresh()}
             colors={[config.default.color.primary]}
           />
         }
         scrollEventThrottle={1000}
         onScroll={event => {
-          if (this.state.loading) {
-            return;
-          }
-
           const offset = event.nativeEvent.contentOffset.y;
           const height =
             event.nativeEvent.contentSize.height - event.nativeEvent.layoutMeasurement.height;
-
           if (offset >= height) {
-            if (this.state.fetching === false) {
+            if (isLoading === false) {
               this.loadMore();
             }
           }
@@ -132,7 +99,9 @@ PageChordsComponent.defaultProps = {
 };
 
 PageChordsComponent.propTypes = {
-  state: PropTypes.object
+  state: PropTypes.object,
+  isLoading: PropTypes.bool.isRequired,
+  chords: PropTypes.array.isRequired
 };
 
 export default PageChordsComponent;
