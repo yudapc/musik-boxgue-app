@@ -17,7 +17,6 @@ import generateUniqKey from '../../helpers/generate-uniq-key';
 export class PageChordsComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
   }
   componentDidMount = () => {
     const { keyword } = this.props;
